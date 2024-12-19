@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title> Print All </title>
+</head>
+<body>
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> Farmers </li>
+                <li> Clients </li>
+                <li> Accounts </li>
+            </ul>
+        </div>
+    </header>
+    <div style="background-color: rgba(232, 122, 119, 0.4); margin-top: 20px;" id="bills_top">
+        <form action="print_all" method="post">
+            {% csrf_token %}
+            <input type="date" name="date" id="date" placeholder="Date">
+            <input id="submit_btn" value="Fetch" type="submit">
+            <p> {{date}} </p>
+        </form>
+    </div>
+    <div id="farm_main">
+        {% for data in data %}
+        <div class="farm_sub"> {{data}} </div>
+        {% endfor %}
+    </div>
+
+    <script>
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().split('T')[0];
+            document.getElementById('date').value = formattedDate;
+    </script>
+    
+</body>
+</html>
