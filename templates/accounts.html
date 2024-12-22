@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Accounts</title>
+    <style>
+        td{
+            width: 20%;
+        }
+        table{
+            margin-top: 30px;
+            width: 70%;
+            margin-left: 15%;
+            background-color: rgba(255, 255, 255, 1);
+        }
+    </style>
+</head>
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> Farmers </li>
+                <li> Clients </li>
+                <li> Accounts </li>
+            </ul>
+        </div>
+    </header>
+    <table cellspacing="10" id="account_tab">
+        <tr>
+            <th style="color: green;"> {{acc.name}} </th>
+            <th style="font-weight: 100; font-size: 15px;";> {{acc.type}} </th>
+        </tr>
+    </table>
+        <table cellspacing="0">
+            <tr id="top">
+                <td> id </td>
+                <td> Date </td>
+                <td> In </td>
+                <td> Out </td>
+                <td> Remarks </td>
+            </tr>
+            
+            {% for trans in data %}
+                <tr>
+                    <td> {{trans.id}} </td>
+                <td> {{trans.date}} </td>
+                <td style="color: red; font-weight: bold;"> 
+                    {% if not trans.in_amt %}
+                    {{''}}
+                    {% else %}
+                    {{trans.in_amt}}
+                    {% endif %}
+                </td>
+                <td style="color: green; font-weight: bold;">
+                    {% if not trans.out_amt %}
+                    {{''}}
+                    {% else %}
+                    {{trans.out_amt}}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not trans.ad %}
+                    {{''}}
+                    {% else %}
+                    {{'Advance'}}
+                    {% endif %}
+                </td>
+                </tr>
+            {% endfor %}
+            
+        </table>
+
+</body>
+</html>

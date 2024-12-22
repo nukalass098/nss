@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> Bills </title>
+</head>
+
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> Farmers </li>
+                <li> Clients </li>
+                <li> Accounts </li>
+            </ul>
+        </div>
+    </header>
+    <div style="background-color: rgba(161, 138, 229, 0.5);" id="bills_top">
+        <h2 align="center"> Add Entry </h2>
+        <form style="flex-direction: column;" method="post">
+            {% csrf_token %}
+            <div class="new_sub">
+            <input required class="name" required type="text" name="name" id="fname" placeholder="Farmer Name">
+            <select name="type">
+                <option id="opt" value="FARMER"> Farmer </option>
+                <option value="SALE"> Sale </option>
+            </select>
+            </div>
+            <input id="submit_btn" value="Save" type="submit">
+        </form>
+
+
+    <script>
+        function upper(ele) {
+            ele.value = ele.value.toUpperCase();
+        }
+
+        ele1 = document.getElementsByClassName('name')[0]
+        ele2 = document.getElementsByClassName('name')[1]
+        ele3 = document.getElementsByClassName('village')[0]
+        ele4 = document.getElementsByClassName('village')[1]
+
+        ele1.addEventListener('input', () => upper(ele1))
+        ele2.addEventListener('input', () => upper(ele2))
+        ele3.addEventListener('input', () => upper(ele3))
+        ele4.addEventListener('input', () => upper(ele4))
+    </script>
+    </div>
+</body>
+
+</html>

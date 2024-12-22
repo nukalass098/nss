@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> <a href="{% url 'newentry' %}"> New Entry </a> </li>
+                <li><a href="{% url 'daybook' %}"> Day Book </a> </li>
+                <li> <a href="{% url 'bills' %}"> Bills </a> </li>
+            </ul>
+        </div>
+    </header>
+    <h1> {{error}} </h1>
+</body>
+</html>

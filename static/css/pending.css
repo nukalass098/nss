@@ -1,0 +1,58 @@
+form {
+    width: 70%;
+    margin-left: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+
+.form_main {
+    height: 70px;
+    width: 150px;
+    border: 0.1px solid black;
+    border-radius: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(233, 217, 125, 0.7);
+}
+
+.radio {
+    height: 30px;
+    width: 30px;
+}
+
+hr {
+    margin-top: -10px;
+}
+
+#submit_btn{
+    height: 40px;
+    width: 100px;
+    border-radius: 20px;
+    border: 1px solid white;
+    background-color: purple;
+    color: white;
+    font-weight: bolder;
+}
+#print_All_main{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px;
+}
+#print_All_main input{
+    border: 1px solid white;
+    background-color: purple;
+    border-radius: 20px;
+    height: 50px;
+    width: 200px;
+    color: white;
+    font-size: 15px;
+}

@@ -1,0 +1,56 @@
+#top > p{
+    text-align: center;
+    padding-bottom: 7px;
+    border-bottom: 2px dotted black;
+}
+p b{
+    font-size: 25px;
+}
+#bill{
+    margin-left: 40%;
+    width: 20%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 0.1px solid black;
+    padding: 10px;
+}
+#top{
+    width: 100%;
+}
+#top_1{
+    padding-bottom: 7px;
+    width: 100%;
+    border-bottom: 2px dotted black;
+}
+.data{
+    width: 100%;
+    text-align: center;
+}
+.data_3{
+    width: 100%;
+    text-align: left;
+    border-bottom: 2px dotted black;
+    border-top: 2px dotted black;
+}
+.data_2{
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+}
+.data td{
+    width: 20%;
+    align-items: center;
+}
+#print{
+    height: 40px;
+    width: 150px;
+    background-color: purple;
+    border: 0px;
+    color: white;
+    margin-top: 20px;
+    margin-left: 45%;
+    border-radius: 20px;
+}

@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Payment Entry</title>
+</head>
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> <a href="{% url 'newentry' %}"> New Entry </a> </li>
+                <li><a href="{% url 'daybook' %}"> Day Book </a> </li>
+                <li> <a href="{% url 'bills' %}"> Bills </a> </li>
+            </ul>
+        </div>
+    </header>
+    <div style="background-color: rgba(161, 138, 229, 0.5);" id="bills_top">
+        <h2 align="center"> Payment Entry </h2>
+        <form style="flex-direction: column;" method="post">
+            {% csrf_token %}
+            <div class="new_sub">
+                <input list="farmers" type="text" name="name" id="fname" class="name" placeholder="Bill Name">
+                <datalist id="farmers">
+                    {% for farmer in farmers %}
+                    <option value="{{farmer}}"> </option>
+                    {% endfor %}
+                </datalist>
+                <input type="date" name="date" id="date">
+            </div>
+            <div class="new_sub">
+            <input type="number" id="amount" name="amount" placeholder="Amount">
+            <select onclick="advance_toggle(this)" name="type">
+                <option id="opt" value="FARMER"> Farmer </option>
+                <option value="SALE"> Sale </option>
+            </select>
+            <div id="check_sub">
+            <input type="checkbox" name="ad_check" id="check"> Advance
+            </div>
+            </div>
+            <input id="submit_btn" value="Save" type="submit">
+        </form>
+        
+        <script>
+            function upper(ele) {
+                ele.value = ele.value.toUpperCase();
+            }
+
+            ele1 = document.getElementsByClassName('name')[0]
+
+            ele1.addEventListener('input', () => upper(ele1))
+
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().split('T')[0];
+            document.getElementById('date').value = formattedDate;
+
+            // adjust advance button 
+
+            function advance_toggle(e){
+                
+                if(e.value == 'FARMER'){
+                    document.getElementById('check_sub').style.display = 'flex';
+                }
+                else{
+                    document.getElementById('check').checked = false;
+                    document.getElementById('check_sub').style.display = 'none';
+                }
+            }
+        </script>
+    </div>
+    <div style="background-color: rgba(232, 122, 119, 0.4);" id="bills_top">
+        <h3 align="center"> Delete Payment </h3>
+        <form action="delete_pay" method="post">
+            {% csrf_token %}
+            <input type="text" name="id" id="id" placeholder="id">
+            <input id="submit_btn" value="Delete" type="submit">
+        </form>
+    </div>
+    <br><br>
+</body>
+</html>
