@@ -184,6 +184,11 @@ def transactions(request):
 
 @login_required
 def accounts(request):
+    farmers = Accounts.objects.filter(type = 'FARMER')
+    farmers = [farmer.name for farmer in farmers]
+    clients = Accounts.objects.filter(type = 'SALE')
+    clients = [client.name for client in clients]
+    data = {'farmers' : farmers, 'sales' : clients}
     if request.method == 'POST':
         name = request.POST.get('name')
         type = request.POST.get('type')
@@ -191,7 +196,7 @@ def accounts(request):
         acc = Accounts.objects.get(name = name, type=type)
         return render(request, 'accounts.html', {'data':transactions, 'acc':acc})
     else:
-        return render(request, 'acc_search.html')
+        return render(request, 'acc_search.html', data)
 
 @login_required
 def acc_search(request):
