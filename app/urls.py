@@ -17,5 +17,6 @@ urlpatterns = [
     path('pending', views.pending, name='pending'),
     path('paper_bill', views.paper_bill, name='paper_bill'),
     path('delete_pay', views.delete_pay, name='delete_pay'),
-    path('client_bill', views.client_bill, name='client_bill')
+    path('client_bill', views.client_bill, name='client_bill'),
+    path('advance', views.advance, name = 'advance')
 ]
