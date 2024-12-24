@@ -62,11 +62,11 @@ def advance(request):
         name = request.POST.get('name')
         date = request.POST.get('date')
         if date and name:
-            data = list(Transactions.objects.filter(name = name, date=date, ad = true))[::-1]
+            data = list(Transactions.objects.filter(name = name, date=date, ad = true, type = 'FARMER'))[::-1]
         elif not date and name:
-            data = list(Person.objects.filter(name = name, ad = True))[::-1]
+            data = list(Person.objects.filter(name = name, ad = True, type = 'FARMER'))[::-1]
         elif not name and date:
-            data = list(Person.objects.filter(date = date, ad true))[::-1]
+            data = list(Person.objects.filter(date = date, ad true, type = 'FARMER'))[::-1]
         else:
             data = data
     return render(request, 'advance.html', {'data':data, 'farmers' :farmers})
