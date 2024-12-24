@@ -69,7 +69,7 @@ def advance(request):
             data = list(Person.objects.filter(date = date, ad true))[::-1]
         else:
             data = data
-    return render(request, 'table.html', {'data':data, 'farmers' :farmers})
+    return render(request, 'advance.html', {'data':data, 'farmers' :farmers})
 
 @login_required
 def paper(request):
