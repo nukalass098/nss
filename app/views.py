@@ -66,7 +66,7 @@ def advance(request):
         elif not date and name:
             data = list(Person.objects.filter(name = name, ad = True, type = 'FARMER'))[::-1]
         elif not name and date:
-            data = list(Person.objects.filter(date = date, ad true, type = 'FARMER'))[::-1]
+            data = list(Person.objects.filter(date = date, ad = true, type = 'FARMER'))[::-1]
         else:
             data = data
     return render(request, 'advance.html', {'data':data, 'farmers' :farmers})
