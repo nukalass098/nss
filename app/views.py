@@ -52,6 +52,26 @@ def table(request):
     return render(request, 'table.html', {'data':data, 'farmers' :farmers})
 
 @login_required
+def advance(request):
+    farmers = Accounts.objects.filter(type = 'FARMER')
+    farmers = [farmer.name for farmer in farmers]
+    clients = Accounts.objects.filter(type = 'SALE')
+    clients = [client.name for client in clients]
+    farmers = farmers + clients
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        date = request.POST.get('date')
+        if date and name:
+            data = list(Transactions.objects.filter(name = name, date=date, ad = true))[::-1]
+        elif not date and name:
+            data = list(Person.objects.filter(name = name, ad = True))[::-1]
+        elif not name and date:
+            data = list(Person.objects.filter(date = date, ad true))[::-1]
+        else:
+            data = data
+    return render(request, 'table.html', {'data':data, 'farmers' :farmers})
+
+@login_required
 def paper(request):
     if (request.method == 'POST'):
         name = request.POST.get('name')
