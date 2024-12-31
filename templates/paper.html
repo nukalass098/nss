@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bill.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Document</title>
+    
+</head>
+<body>
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> Farmers </li>
+                <li> Clients </li>
+                <li> Accounts </li>
+            </ul>
+        </div>
+    </header>
+    <div id="bill">
+        <div id="top">
+            <p> 
+            <b> - NSS - </b><br>
+            Chinarikatla junction<br>
+            9490272712, 9492757495 </p>
+        </div>
+        <div id="top_1">
+            <table>
+                <tr>
+                    <td> Bill No: </td>
+                    <td> <b> {{extra.vocher}}</b> </td>
+                </tr>
+            <tr>
+                <td> Date : </td>
+                <td> <b> {{extra.date}}</b> </td>
+            </tr>
+            <tr>
+                <td> Name : </td>
+                <td> <b> {{extra.name}} </b> </td>
+            </tr>
+            </table>
+        </div>
+            <table class="data">
+                <tr>
+                    <td> Qnt </td>
+                    <td> Price </td>
+                    <td> Amount </td>
+                </tr>
+                {% for bill in bill %}
+                <tr>
+                    <td> {{bill.qnt}} </td>
+                    <td> {{bill.price}} </td>
+                    <td>{{bill.tot}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td style="border-top: 2px dotted black;"><b> {{extra.lot}} </b> </td>
+                    <td style="border-top: 2px dotted black;"></td>
+                    <td style="border-top: 2px dotted black;"> {{extra.sum}} </td>
+                </tr>
+            </table>
+            <table  class="data_3">
+                <tr>
+                    <td> (-) </td>
+                    <td> comm @ 10% </td>
+                    <td> {{extra.comm}} </td>
+                </tr>
+                <tr>
+                    <td> (-) </td>
+                    <td> Advance </td>
+                    <td> {{extra.advance}} </td>
+                </tr>
+                <tr>
+                    <td> (-) </td>
+                    <td> Others </td>
+                    <td> {{extra.others}} </td>
+                </tr>
+                <tr>
+                    <td style="border-top: 2px dotted black;"> </td>
+                    <td style="border-top: 2px dotted black;">Total :</td>
+                    <td style="border-top: 2px dotted black;"> {{extra.sub_tot}} </td>
+                </tr>
+            
+            <table class="data_2">
+                <tr>
+                    <td>Net Rs : </td>
+                    <td style="font-size: 20px;"> <b> {{extra.net}} </b> </td>
+                </tr>
+            </table>
+    </div>
+</body>
+</html>

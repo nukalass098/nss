@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> Bills </title>
+</head>
+
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> Farmers </li>
+                <li> Clients </li>
+                <li> Accounts </li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="bills_top">
+        <h3 align="center"> Farmer Pending Statement </h3>
+        <form action="acc_statement" method="post">
+            {% csrf_token %}
+            <input list="farmers" type="text" name="name" id="fname" placeholder="Farmer Name">
+            <datalist id="farmers">
+                {% for farmer in farmers %}
+                <option value="{{farmer}}"> </option>
+                {% endfor %}
+            </datalist>
+            <input type="date" name="p_date" id="date">
+            <input id="submit_btn" value="Statement" type="submit">
+        </form>
+    </div>
+
+    <script src="{% static 'js/upper.js' %}">
+
+        function upper(ele) {
+            ele.value = ele.value.toUpperCase();
+        }
+
+        ele3 = document.getElementById('fname')
+
+        ele3.addEventListener('input', () => upper(ele3))
+    </script>
+</body>
+
+</html>

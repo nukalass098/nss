@@ -1,0 +1,287 @@
+#form{
+    width: 100vw;
+    height: 70vh;
+    margin-top: 50px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;  
+}
+.in_1{
+    height: 40px;
+    width: 30vw;
+    border-radius: 10px;
+    border: 0.1px solid black;
+    padding: 5px;
+    margin: 10px;
+}
+input::placeholder{
+    color: black;
+    font-family: monospace;
+    text-indent: 15px;
+}
+.in_1:nth-child(1){
+    background-color: rgb(173, 120, 223);
+}
+.in_1:nth-child(2) {
+    background-color: rgb(190, 166, 138);
+}
+.in_2:nth-child(1) {
+    background-color: rgb(113, 160, 229);
+}
+
+.in_2:nth-child(2) {
+    background-color: rgb(210, 123, 172);
+}
+.in_2{
+    width: 13.5vw;
+    height: 40px;
+    border-radius: 10px;
+    border: 0.1px solid black;
+    padding: 5px;
+    margin: 10px;
+}
+#form_sub{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+}
+#save{
+    height: 50px;
+    width: 10vw;
+    border-radius: 10px;
+    border: 0.1px solid black;
+    padding: 5px;
+    background-color: rgb(171, 120, 62);
+    margin: 20px;
+    font-size: 15px;
+    text-indent: 0px;
+    font-family: monospace;
+}
+input{
+    text-indent: 15px;
+    font-size: 17px;
+}
+input:hover{
+    box-shadow: white 0px 0px 10px;
+}
+
+
+/* Bills.html */
+
+#bills_top {
+    width: 80vw;
+    margin-left: 10vw;
+    margin-top: 80px;
+    border-radius: 20px;
+    background-color: rgba(96, 201, 173, 0.4);
+    border: 0.5px solid black;
+}
+
+#bills_top form {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center;
+}
+
+form {
+    height: fit-content;
+    padding: 20px;
+}
+
+#fname, #amount{
+    height: 40px;
+    background-color: rgb(212, 155, 155);
+    width: 350px;
+    border-radius: 20px;
+    border: 0.1px solid black;
+}
+
+#date{
+    height: 40px;
+    width: 200px;
+    padding-right: 30px;
+    background-color: rgb(204, 172, 233);
+    border-radius: 20px;
+    border: 0.1px solid black;
+    cursor: pointer;
+}
+
+#submit_btn, #print_btn{
+    height: 40px;
+    width: 100px;
+    border-radius: 20px;
+    border: 0.1px solid black;
+    background-color: rgb(194, 194, 163);
+    text-indent: 0px;
+    cursor: pointer;
+}
+
+#id {
+    height: 40px;
+    width: 200px;
+    background-color: rgb(204, 172, 233);
+    border-radius: 20px;
+    border: 0.1px solid black;
+}
+
+/* Add.html */
+
+.village, .phone{
+    width: 250px;
+    height: 40px;
+    border-radius: 20px;
+    border: 0.1px solid black;
+    background-color: rgb(167, 117, 213);
+}
+.phone{
+    background-color: rgb(232, 184, 113);
+}
+select{
+    height: 40px;
+    text-indent: 30px;
+    width: 130px;
+    font-size: 15px;
+    border-radius: 20px;
+    border: 0.1px solid black;
+    background-color: rgba(96, 201, 173, 0.4);
+}
+select option{
+    font-size: 20px;
+}
+.new_sub{
+    gap: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* transactions */
+
+#amount{
+    background-color: rgba(96, 201, 173, 0.4);
+    width: 200px;
+}
+
+/* accounts.html */
+#account_tab{
+    width: 30%;
+    text-align: center;
+    border: 1px solid black;
+    margin-left: 35%;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+#account_tab tr th{
+    width: 30%;
+    height: 30px;
+    font-size: 20px;
+    font-family: monospace;
+}
+#account_tab tr td{
+    width: 30%;
+}
+
+/* print_all.html */
+#farm_main{
+    width: 70%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-left: 15%;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.search_head{
+    width: 100vw;
+    margin: 30px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search_head div{
+    color: black;
+    border-bottom: 0.1px solid black;
+    background-color: rgb(228, 222, 234);
+    width: 30%;
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    border-radius: 20px;
+    padding: 10px;
+}
+.farm_sub{
+    padding: 20px 50px;
+    border-radius: 30px;
+    background-color: rgba(31, 97, 80, 0.8);
+    color: white;
+    cursor: pointer;
+}
+#added{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+/* transactions */
+#check_sub{
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 20px;
+}
+#check_sub input{
+    height: 30px;
+    width: 30px;
+}
+.check_sub{
+    display: flex;
+    align-items: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    color: white;
+}
+.check_main{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 50px;
+    width: 100%;
+}
+.check{
+    height: 30px;
+    width: 30px;
+}
+#not_main{
+    width: 80%;
+    margin-left: 10%;
+    border-radius: 20px;
+    padding: 20px 0px;
+    gap: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    background-color: rgba(174, 169, 161, 0.867);
+}
+.not_sub{
+    text-align: center;
+    padding: 10px;
+    border: 0.1px solid black;
+    border-radius: 20px;
+    width: 100px;
+}

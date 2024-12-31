@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bill.css' %}">
+    <title>Document</title>
+    <style>
+        @media print{
+            body{
+                margin: 0px;
+                height: fit-content;
+		width: 100%;
+            }
+            #bill{
+                width: 100%;   
+                margin: 0px;
+                border: 0px;
+                padding: 0px;
+                height: fit-content;
+            }
+            #top{
+                text-align: center;
+            }
+            #top_1 table{
+                margin-left: 10px;
+            }
+	    #top_1{
+		width: 100%;
+		}
+        }
+    </style>
+</head>
+
+<body>
+    <div id="bill">
+        <div id="top">
+            <p>
+                <b>  - NSS -  </b><br>
+                Chinarikatla junction<br>
+                9490272712, 9492757495
+            </p>
+        </div>
+        <div id="top_1">
+            <table>
+                <tr>
+                    <td> Bill No: </td>
+                    <td> {{extra.vocher}} </td>
+                </tr>
+                <tr>
+                    <td> Date : </td>
+                    <td> <b> {{extra.date}}</b> </td>
+                </tr>
+                <tr>
+                    <td> Name : </td>
+                    <td> <b> {{extra.name}} </b> </td>
+                </tr>
+            </table>
+        </div>
+        <table class="data">
+            <tr>
+                <td> Qnt </td>
+                <td> Price </td>
+                <td> Amount </td>
+            </tr>
+            {% for bill in bill %}
+            <tr>
+                <td> {{bill.qnt}} </td>
+                <td> {{bill.price}} </td>
+                <td>{{bill.tot}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td style="border-top: 1px dotted black;"><b> {{extra.lot}} </b> </td>
+                <td></td>
+                <td style="border-top: 1px dotted black;"> {{extra.sum}} </td>
+            </tr>
+        </table>
+        <table class="data_3">
+            <tr>
+                <td> (-) </td>
+                <td> comm @ 10% </td>
+                <td> {{extra.comm}} </td>
+            </tr>
+            <tr>
+                <td> (-) </td>
+                <td> Advance </td>
+                <td> {{extra.advance}} </td>
+            </tr>
+            <tr>
+                <td> (-) </td>
+                <td> Others </td>
+                <td> {{extra.others}} </td>
+            </tr>
+            <tr>
+                <td style="border-top: 1px dotted black;"> </td>
+                <td style="border-top: 1px dotted black;">Total :</td>
+                <td style="border-top: 1px dotted black;"> {{extra.sub_tot}} </td>
+            </tr>
+
+            <table class="data_2">
+                <tr>
+                    <td>Net Rs : </td>
+                    <td style="font-size: 20px;"> <b> {{extra.net}} </b> </td>
+                </tr>
+            </table>
+    </div>
+    <script>
+        window.print();
+        setTimeout(() => {
+            window.history.back();
+            window.location.reload()
+            console.log('Going Back')
+        }, 1000)
+	document.addEventListener('DOMContentLoaded', (event) => {
+    setTimeout(function() {
+        document.getElementById('yourButton').click();
+    }, 1500);
+});
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> Bills </title>
+    <script>
+        function view_form() {
+                let myForm = document.getElementById('myForm')
+                myForm.action = 'paper'
+                myForm.submit()
+            }
+            function print_form() {
+                let myForm = document.getElementById('myForm')
+                myForm.action = 'paper_bill'
+                myForm.submit()
+            }
+    </script>
+</head>
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> Farmers </li>
+                <li> Clients </li>
+                <li> Accounts </li>
+            </ul>
+        </div>
+    </header>
+    <div id="bills_top">
+        <h3 align="center"> Search Bill </h3>
+        <form id="myForm" action="paper" method="post">
+            {% csrf_token %}
+            <input list="farmers" type="text" name="name" id="fname" placeholder="Bill Name">
+            <datalist id="farmers">
+                {% for farmer in farmers %}
+                <option value="{{farmer}}"> </option>
+                {% endfor %}
+            </datalist>
+            <input type="date" name="date" id="date">
+	    
+            <input id="submit_btn" style='background-color:cyan' type="button" onclick="view_form()" value="View">
+            <input type="date" style="display: none;" name="p_date" id="p_date">
+            <script>
+                let yourDate = new Date()
+                document.getElementById('p_date').value = yourDate.toISOString().split('T')[0]
+            </script>
+            <input id="print_btn" type="button" onclick="print_form()"  value="Print">
+        </form>
+    
+    </div>
+    <div style="background-color: rgba(232, 122, 119, 0.4);" id="bills_top">
+        <h3 align="center"> Delete Bill </h3>
+        <form action="delete" method="post">
+            {% csrf_token %}
+            <input type="text"  name="id" id="id" placeholder="id">
+            <input id="submit_btn" value="Delete" type="submit">
+        </form>
+    </div>
+    <script src="{% static 'js/upper.js' %}">
+        
+            function upper(ele) {
+                    ele.value = ele.value.toUpperCase();
+                }
+
+            ele3 = document.getElementById('fname')
+
+            ele3.addEventListener('input', () => upper(ele3))
+
+            window.addEventListener('pageshow', function (event) {
+                    if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+                        // Force reload or reinitialize your scripts here
+                        location.reload();
+                    }
+                });
+                
+    </script>
+</body>
+</html>

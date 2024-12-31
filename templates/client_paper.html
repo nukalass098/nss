@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bill.css' %}">
+    <title>Document</title>
+    <style>
+        @media print{
+            header{
+                display: none;
+            }
+            body{
+                margin: 0px;
+                height: fit-content;
+		        width: 100%;
+            }
+            #bill{
+                width: 100%;   
+                margin: 0px;
+                border: 0px;
+                padding: 0px;
+                height: fit-content;
+            }
+            #top{
+                text-align: center;
+            }
+            #top_1 table{
+                margin-left: 10px;
+            }
+            div{
+                width: 100%;
+            }
+	    #top_1{
+		width: 100%;
+		}
+        #top_btn{
+            display: hidden;
+        }
+#top_btn{
+display: none;
+}
+        }
+        #top_btn{
+            width: 100vw;
+            height: fit-content;
+            padding: 10px 0px;
+        }
+        #submit_btn{
+            width: 200px;
+            height: 40px;
+            border-radius: 20px;
+            border: 1px solid white;
+            background-color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top_btn">
+        <button id="submit_btn" onclick = 'print_bill()'> Print </button>
+<script>
+function print_bill(){
+window.print()
+}
+</script>
+    </div>
+    <div id="bill">
+        <div id="top">
+            <p>
+                <b>  - NSS -  </b><br>
+                Chinarikatla junction<br>
+                9490272712, 9492757495
+            </p>
+        </div>
+        <div id="top_1">
+            <table>
+                <tr>
+                    <td>
+                        Sales Bill
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td> Date : </td>
+                    <td> <b> {{extra.date}}</b> </td>
+                </tr>
+                <tr>
+                    <td> Name : </td>
+                    <td> <b> {{extra.name}} </b> </td>
+                </tr>
+            </table>
+        </div>
+        <table class="data">
+            <tr>
+                <td> Qnt </td>
+                <td> Price </td>
+                <td> Amount </td>
+            </tr>
+            {% for bill in bill %}
+            <tr>
+                <td> {{bill.qnt}} </td>
+                <td> {{bill.price}} </td>
+                <td>{{bill.tot}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td style="border-top: 2px dotted black;"><b> {{extra.lot}} </b> </td>
+                <td style="border-top: 2px dotted black;"></td>
+                <td style="border-top: 2px dotted black;"> {{extra.sum}} </td>
+            </tr>
+        </table>
+        <table class="data_3">
+            <tr>
+                <td> (+) </td>
+                <td> Bags ({{extra.bcou}}) </td>
+                <td> {{extra.bags}} </td>
+            </tr>
+            <tr>
+                <td> (+) </td>
+                <td> hamali </td>
+                <td> {{extra.hamali}} </td>
+            </tr>
+            <tr>
+                <td> (+) </td>
+                <td> Others </td>
+                <td> {{extra.others}} </td>
+            </tr>
+            <tr>
+                <td style="border-top: 2px dotted black;"> </td>
+                <td style="border-top: 2px dotted black;">Total :</td>
+                <td style="border-top: 2px dotted black;"> {{extra.sub_tot}} </td>
+            </tr>
+
+            <table class="data_2">
+                <tr>
+                    <td>Net Rs : </td>
+                    <td style="font-size: 20px;"> <b> {{extra.net}} </b> </td>
+                </tr>
+            </table>
+    </div>
+</body>
+
+</html>

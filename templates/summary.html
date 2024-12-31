@@ -1,0 +1,49 @@
+{% load static %}
+<html>
+
+<head>
+    <title> Day Book  </title>
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width = device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> <a> Farmers </a> </li>
+                <li> <a> Clients </a> </li>
+                <li> <a> Accounts </a> </li>
+            </ul>
+        </div>
+
+    </header>
+    
+    <div id="body">
+        <br><br>
+        <table cellspacing="0">
+            <tr id="top">
+                <td> Name </td>
+                <td> Balance </td>
+            </tr>
+            {% for name, bal in data %}
+            <tr class="row">
+            <td> {{name}} </td>
+            <td> {{bal}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+</body>
+
+</html>

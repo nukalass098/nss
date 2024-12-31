@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSS</title>
+</head>
+
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> <a href="{% url 'newentry' %}"> New Entry </a> </li>
+                <li><a href="{% url 'daybook' %}"> Day Book </a> </li>
+                <li> <a href="{% url 'bills' %}"> Bills </a> </li>
+            </ul>
+        </div>
+    </header>
+    <div class="main">
+        <a class="main_sub" href="{% url 'daybook' %}">
+            <img src="{% static 'images/book.png' %}" class="main_img">
+            <p class="main_p"> Day Book </p>
+        </a>
+        <a class="main_sub" href="{% url 'newentry' %}">
+            <img src="{% static 'images/new.png' %}" class="main_img">
+            <p class="main_p"> New Entry </p>
+        </a>
+        <a class="main_sub" href="{% url 'advance' %}">
+            <img src="{% static 'images/bill.png' %}" class="main_img">
+            <p class="main_p"> Advance / Sales </p>
+        </a>
+    </div>
+        <div class="main">
+             <a class="main_sub" href="{% url 'client_bill' %}">
+                <img src="{% static 'images/print.png' %}" class="main_img">
+                <p class="main_p"> Sales Bills </p>
+            </a>
+            <a class="main_sub" href="{% url 'pending' %}">
+                <img src="{% static 'images/print.png' %}" class="main_img">
+                <p class="main_p"> Pending Bills </p>
+            </a>
+            <a class="main_sub" href="{% url 'transactions' %}">
+                <img src="{% static 'images/payment.png' %}" class="main_img">
+                <p class="main_p"> Payment Entry </p>
+            </a>
+        </div>
+        <div class="main">
+             <a class="main_sub" href="{% url 'accounts' %}">
+                <img src="{% static 'images/account.png' %}" class="main_img">
+                <p class="main_p"> Accounts </p>
+            </a>
+             <a class="main_sub" href="{% url 'bills' %}">
+            <img src="{% static 'images/bill.png' %}" class="main_img">
+            <p class="main_p"> Manage Bills </p>
+            </a>
+            <a class="main_sub" href="{% url 'add' %}">
+                <img src="{% static 'images/add.png' %}" class="main_img">
+                <p class="main_p"> Add Party </p>
+            </a>
+           
+        </div>
+        <div class="main">
+            <a class="main_sub" href="{% url 'print_all' %}">
+                <img src="{% static 'images/find.png' %}" class="main_img">
+                <p class="main_p"> Search </p>
+            </a>
+            <a class="main_sub" href="{% url 'acc_statement' %}">
+                <img src="{% static 'images/new.png' %}" class="main_img">
+                <p class="main_p"> Farmer Statement Bill </p>
+            </a>
+            <a class="main_sub" href="{% url 'summary' %}">
+                <img src="{% static 'images/summary.png' %}" class="main_img">
+                <p class="main_p"> Account Summary </p>
+            </a>
+        </div>
+<div class="main">
+    <a class="main_sub" href="{% url 'submit' %}">
+        <img src="{% static 'images/submit.png' %}" class="main_img">
+        <p class="main_p"> Submit Details </p>
+    </a>
+</div>
+
+</body>
+
+</html>

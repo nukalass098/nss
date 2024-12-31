@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bill.css' %}">
+    <title>Document</title>
+    <style>
+        @media print{
+            body{
+                margin: 0px;
+                height: fit-content;
+		width: 100%;
+            }
+            #bill{
+                width: 100%;   
+                margin: 0px;
+                border: 0px;
+                padding: 0px;
+                height: fit-content;
+            }
+            #top{
+                text-align: center;
+            }
+            #top_1 table{
+                margin-left: 10px;
+            }
+            #top_btn{
+                display: none;
+            }
+            header{
+                display: none;
+            }
+	    #top_1{
+		width: 100%;
+		}
+        }
+        
+        .data tr td:nth-child(1){
+            width: 40%;
+        }
+        .data tr td:nth-child(2){
+            width: 20%
+        }
+        .data tr td:nth-child(3){
+            width: 40%;
+        }
+        #top_btn{
+            width: 100vw;
+            height: fit-content;
+            padding: 10px 0px;
+        }
+        #submit_btn{
+            width: 200px;
+            height: 40px;
+            border-radius: 20px;
+            border: 1px solid white;
+            background-color: purple;
+        }
+    </style>
+</head>
+
+<body>
+        <header>
+            <img alt="img" src="{% static '/images/shake.png' %}">
+            <div id="div1">
+                <h1> N S S </h1>
+            </div>
+            <div id="div2">
+                <ul>
+                    <li> <a href="{% url 'home' %}"> Home </a> </li>
+                    <li> Farmers </li>
+                    <li> Clients </li>
+                    <li> Accounts </li>
+                </ul>
+            </div>
+        </header>
+        <div id="top_btn">
+            <button id="submit_btn" onclick='print_bill()'> Print </button>
+            <script>
+                function print_bill() {
+                    window.print()
+                }
+            </script>
+        </div>
+    <div id="bill">
+        <div id="top">
+            <p>
+                <b>  - NSS -  </b><br>
+                Chinarikatla junction<br>
+                9490272712, 9492757495
+            </p>
+        </div>
+        <div id="top_1">
+            <table>
+                <tr>
+                    <td> Name : </td>
+                    <td> <b> {{extra.name}} </b> </td>
+                </tr>
+            </table>
+        </div>
+        <table class="data">
+            <tr>
+                <td> Date </td>
+                <td>  </td>
+                <td> amt </td>
+            </tr>
+            
+            {% for bill, bag in pending_bills %}
+            <tr>
+                <td> {{bill.date}} </td>
+                <td> {{bag}} </td>
+                <td> {{bill.in_amt}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td> ( {{extra.bags_tot}} )</td>
+                <td></td>
+            </tr>
+        </table>
+            <table style="border-top: 2px dotted black;" class="data_2">
+                <tr>
+                    <td>Net Rs : </td>
+                    <td style="font-size: 20px;"> <b> {{extra.net}} </b> </td>
+                </tr>
+            </table>
+    </div>
+</body>
+
+</html>

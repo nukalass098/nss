@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> Bills </title>
+    
+</head>
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> Farmers </li>
+                <li> Clients </li>
+                <li> Accounts </li>
+            </ul>
+        </div>
+    </header>
+    <div style="margin-top: 20px;" id="bills_top">
+        <h3 align="center"> Sales Bill </h3>
+        <form style="flex-direction: column;" id="myForm" action="client_bill" method="post">
+            {% csrf_token %}
+            <div class="new_sub">
+            <input list="clients" type="text" name="name" id="fname" placeholder="Sale Name">
+            <datalist id="clients">
+                {% for farmer in clients %}
+                <option value="{{farmer}}"> </option>
+                {% endfor %}
+            </datalist>
+            <input type="date" name="date" id="date">
+        </div>
+            <div class="new_sub">
+            <input type="number" id="amount" name="bags" placeholder="Bags">
+            <div id="check_sub">
+            <input type="checkbox" id="amount" name="hamali" placeholder="Hamali"> Hamali
+           </div>
+            </div>
+            <input id="submit_btn" type="submit"  value="View">
+        </form>
+    
+    </div>
+    <script src="{% static 'js/upper.js' %}">
+        
+            function upper(ele) {
+                    ele.value = ele.value.toUpperCase();
+                }
+
+            ele3 = document.getElementById('fname')
+
+            ele3.addEventListener('input', () => upper(ele3))
+
+            window.addEventListener('pageshow', function (event) {
+                    if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+                        // Force reload or reinitialize your scripts here
+                        location.reload();
+                    }
+                });
+
+    </script>
+</body>
+</html>

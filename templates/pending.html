@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pending.css' %}">
+    <title> Bills </title>
+</head>
+
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> Farmers </li>
+                <li> Clients </li>
+                <li> Accounts </li>
+            </ul>
+        </div>
+    </header>
+    <form id="filter_form" action="pending" method="POST">
+        {% csrf_token %}
+        <input list="farmers" type="text"placeholder="Farmer Name" name="name" id="fname">
+        <datalist id="farmers">
+            {% for farmer in farmers %}
+            <option value="{{farmer}}"> </option>
+            {% endfor %}
+        </datalist>
+        <input type="submit" id="submit_btn">
+    </form>
+        <form id="myForm" action="paper_bill" method="post">
+            <input type="date" style="display: none;" name="p_date" id="p_date">
+            <script>
+                let yourDate = new Date()
+                document.getElementById('p_date').value = yourDate.toISOString().split('T')[0]
+            </script>
+            {% csrf_token %}
+            <input id="submit_btn" type="submit">
+            {% for sub in data %}
+            <div class="form_main">
+                <input type="radio" name="id" value="{{sub.id}}" class="radio">
+                <div class="form_sub">
+                    <p class="sub_1"> <b> {{sub.name}} </b>
+                        <hr> {{sub.date}}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </form>
+        <div id="print_All_main">
+            <input type="button" id="print_all_btn" value="Print all bills" onclick="validate(this)">
+        </div>
+        <script>
+
+            
+
+            window.addEventListener('pageshow', function (event) {
+                    if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+                        // Force reload or reinitialize your scripts here
+                        location.reload();
+                    }
+                });
+
+            function print_bill(){
+                let pending = document.querySelectorAll('input[name="id"]')
+                if (pending.length > 0) {
+                    pending[0].checked = true;
+                    form = document.getElementById('myForm').submit()
+                }
+                else{
+                    sessionStorage.setItem('clicked', 'false');
+                }                
+            }
+        
+            let clicked_btn = sessionStorage.getItem('clicked') === 'true';
+
+            if(clicked_btn){
+                setTimeout(() => { print_bill() }, 500)
+                document.getElementById('print_all_btn').value = 'Stop Printing'
+                document.getElementById('print_all_btn').style.backgroundColor = 'red'
+            }
+            else{
+                document.getElementById('print_all_btn').value = 'Print All Bills'
+                document.getElementById('print_all_btn').style.backgroundColor = 'purple'
+            }
+            
+           
+
+            function validate(e) {
+                    let clicked = sessionStorage.getItem('clicked') === 'true';
+                    if (!clicked) {
+                        sessionStorage.setItem('clicked', 'true');
+                        e.value = 'Stop Bill printing';
+                        e.style.backgroundColor = 'red'
+                        
+                        console.log(sessionStorage.getItem('clicked'));
+                    } else {
+                        sessionStorage.setItem('clicked', 'false');
+                        e.value = 'Print all bills';
+                        e.style.backgroundColor = 'purple'
+                        console.log(sessionStorage.getItem('clicked'));
+                    }
+                let clicked_btn = sessionStorage.getItem('clicked') === 'true';
+
+                if (clicked_btn) {
+                    setTimeout(() => { print_bill() }, 500)
+                }
+                }
+
+        </script>
+</body>
+
+</html>

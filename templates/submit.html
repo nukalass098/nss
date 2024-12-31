@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Payment Entry</title>
+</head>
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> <a href="{% url 'newentry' %}"> New Entry </a> </li>
+                <li><a href="{% url 'daybook' %}"> Day Book </a> </li>
+                <li> <a href="{% url 'bills' %}"> Bills </a> </li>
+            </ul>
+        </div>
+    </header>
+    <div id="not_main">
+            {% for x in data %}
+            <div class="not_sub"> {{x}} </div>
+            {% endfor %}
+    </div>
+
+    <div style="background-color: rgba(161, 138, 229, 0.5);" id="bills_top">
+        <h2 align="center"> Submition </h2>
+        <form style="flex-direction: column;"action="submit" method="post">
+            {% csrf_token %}
+            <div class="check_main">
+            <div class="check_sub">
+                <input type="checkbox" class="check">      
+                Daybook Entry
+            </div>
+            <div class="check_sub">
+                <input type="checkbox" class="check">
+                Daybook Checking
+            </div>
+            <div class="check_sub">
+                <input type="checkbox" class="check">
+                Advances / Sales entry
+            </div>
+            </div>
+            <input id="submit_btn" id="submit" value="Save" type="submit">
+        </form>
+        
+    </div>
+
+    <script>
+        
+        document.getElementById('submit_btn').style.visibility = 'hidden'
+
+        let arr = document.getElementsByClassName('check'); // Get all elements with class 'check'
+
+
+        function validity() {
+
+                let allChecked = true; // Use a descriptive variable name
+                
+                // Use for...of loop to iterate over elements
+                for (let checkbox of arr) {
+                    if (!checkbox.checked) {
+                        allChecked = false; // If any checkbox is not checked, set flag to false
+                        break; // No need to check further
+                    }
+                }
+
+                // Set visibility of the submit button based on the flag
+                document.getElementById('submit_btn').style.visibility = allChecked ? 'visible' : 'hidden';
+
+                
+            }
+
+            for (let x of arr) {
+                    x.addEventListener('change', validity)
+                }
+    </script>
+</body>
+</html>

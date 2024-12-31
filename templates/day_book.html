@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <title> Day Book </title>
+</head>
+<body background="{% static '/images/back.jpg' %}">
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> Farmers </li>
+                <li> Clients </li>
+                <li> Accounts </li>
+            </ul>
+        </div>
+<style>
+table{
+background-color: white;
+width: 70vw;
+margin-left: 15vw;
+margin-top: 20px;
+}
+</style>
+    </header>
+<div>
+<table>
+<tr>
+<td>  {{data.id}}  </td>
+<td> {{data.fname}}	</td>
+<td> {{data.cname}}	</td>
+<td>  {{data.qnt}}	</td>
+<td> {{data.price}}	</td>
+</tr>
+</table>
+</div>
+    <form id="form" method="POST" action="newentry">
+        {% csrf_token %}
+            <input required type="text" list="farmers" placeholder="Farmer Name " class="in_1" name="farmer_name" maxlength="30">
+            <datalist id="farmers">
+                {% for farmer in farmers %}
+                    <option value="{{farmer}}">  </option>
+                {% endfor %}
+            </datalist>
+            <input required value="NSS" list="clients" type="text" placeholder="Client Name " class="in_1" name="client_name" maxlength="30">
+            <datalist id="clients">
+                {% for clinet in sales %}
+                <option value="{{clinet}}"> </option>
+                {% endfor %}
+            </datalist>
+        <div class="form_sub">
+            <input required value="1" type="number" placeholder="Quantity" class="in_2" name = "quantity" id="quantity">
+
+            <input required type="number" placeholder="Price" class="in_2" name="price" id="price">
+        </div>
+        <div class="form_sub">
+            <input onchange="change_date()" required type="date" name="date" id="date">
+                
+            <input type="submit" value="Save" id="save">
+        </div>
+        
+    </form>
+    <script src="{% static 'js/date.js' %}"></script>
+    <script src="{% static 'js/upper.js' %}">
+            function upper(ele) {
+                    ele.value = ele.value.toUpperCase();
+                }
+
+            ele1 = document.getElementsByClassName('in_1')[0]
+            ele2 = document.getElementsByClassName('in_1')[1]
+
+
+            ele1.addEventListener('input', () => upper(ele1))
+            ele2.addEventListener('input', () => upper(ele2))
+    </script>
+    <script>
+        let date_stored = localStorage.getItem('date')
+        if (date_stored){
+            document.getElementById('date').value = date_stored
+        }
+        function change_date(){
+            let c_date = document.getElementById('date').value
+            localStorage.setItem('date', c_date)
+        }
+    </script>
+</body>
+</html>
