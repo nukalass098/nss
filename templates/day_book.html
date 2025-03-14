@@ -45,7 +45,7 @@ margin-top: 20px;
 </div>
     <form id="form" method="POST" action="newentry">
         {% csrf_token %}
-            <input required type="text" list="farmers" placeholder="Farmer Name " class="in_1" name="farmer_name" maxlength="30">
+            <input required type="text" list="farmers" placeholder="Farmer Name " class="in_1" name="farmer_name" maxlength="30" autofocus>
             <datalist id="farmers">
                 {% for farmer in farmers %}
                     <option value="{{farmer}}">  </option>
@@ -83,13 +83,13 @@ margin-top: 20px;
             ele2.addEventListener('input', () => upper(ele2))
     </script>
     <script>
-        let date_stored = localStorage.getItem('date')
-        if (date_stored){
+        let date_stored = sessionStorage.getItem('date')
+        if (date_stored) {
             document.getElementById('date').value = date_stored
         }
-        function change_date(){
+        function change_date() {
             let c_date = document.getElementById('date').value
-            localStorage.setItem('date', c_date)
+            sessionStorage.setItem('date', c_date)
         }
     </script>
 </body>

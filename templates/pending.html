@@ -34,16 +34,12 @@
             <option value="{{farmer}}"> </option>
             {% endfor %}
         </datalist>
-        <input type="submit" id="submit_btn">
+        <input type="submit" value="Search" id="submit_btn">
     </form>
         <form id="myForm" action="paper_bill" method="post">
-            <input type="date" style="display: none;" name="p_date" id="p_date">
-            <script>
-                let yourDate = new Date()
-                document.getElementById('p_date').value = yourDate.toISOString().split('T')[0]
-            </script>
+
             {% csrf_token %}
-            <input id="submit_btn" type="submit">
+            <input id="submit_btn" value="Print" type="submit">
             {% for sub in data %}
             <div class="form_main">
                 <input type="radio" name="id" value="{{sub.id}}" class="radio">

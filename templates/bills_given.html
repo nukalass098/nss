@@ -33,7 +33,7 @@ width: 30px;
 </style>
     </header>
     
-    <form id="filter_form" action="daybook" method="POST">
+    <form id="filter_form" action="bills_given" method="POST">
         {% csrf_token %}
         <input list="farmers" type="text" placeholder="Farmer Name" name="name" id="fname">
         <datalist id="farmers">
@@ -48,42 +48,33 @@ width: 30px;
         <br><br>
         <table cellspacing="0">
             <tr id="top">
-                <td> ID </td>
+                <td> Bill No </td>
                 <td> Date </td>
-                <td> Farmer </td>
-                <td> Client </td>
-                <td> Qnt </td>
-                <td> Price </td>
+                <td> Name </td>
+                <td> Given Date </td>
             </tr>
             {% for data in data %}
             <tr class="row">
             <td> {{data.id}} </td>
             <td> {{data.date}} </td>
-            <td> {{data.fname}} </td>
-            <td> {{data.cname}} </td>
-            <td> {{data.qnt}} </td>
-            <td> {{data.price}} &nbsp; <input type='checkbox'> </td>
+            <td> {{data.name}} </td>
+            <td> {{data.given}} </td>
             </tr>
             {% endfor %}
         </table>
+        <h4 align="center"> {{text}} </h4>
         <br>
-        {% if extra.bags %}
-        <table>
-            <tr> 
-                <td> Total Bags </td> 
-                <td> Amount </td>
-                <td> Stock </td>
-                <td> Stock bags </td>
-            </tr>
-            <tr> 
-                <td> {{extra.bags}} </td>
-                <td> {{extra.total}} </td> 
-                <td> {{extra.stock}} </td>
-                <td> {{extra.s_bags}} </td>
-            </tr>
-        </table>
-        {% endif %}
     </div>
+    <div style="background-color: rgba(232, 122, 119, 0.4);" id="bills_top">
+        <h3 align="center"> Delete Bill </h3>
+        <form action="delete_bill" method="post">
+            {% csrf_token %}
+            <input type="number" name="id" id="id" placeholder="Bill No">
+            <input id="submit_btn" style="width: 150px;" value="Bill Not Given" type="submit">
+        </form>
+
+    </div>
+    <br>
 </body>
 
 </html>
