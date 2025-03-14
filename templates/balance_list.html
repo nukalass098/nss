@@ -1,0 +1,79 @@
+{% load static %}
+<html>
+
+<head>
+    <title> Day Book  </title>
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width = device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <img alt="img" src="{% static '/images/shake.png' %}">
+        <div id="div1">
+            <h1> N S S </h1>
+        </div>
+        <div id="div2">
+            <ul>
+                <li> <a href="{% url 'home' %}"> Home </a> </li>
+                <li> <a> Farmers </a> </li>
+                <li> <a> Clients </a> </li>
+                <li> <a> Accounts </a> </li>
+            </ul>
+        </div>
+
+    </header>
+
+    <form id="filter_form" action="balance_list" method="POST">
+        {% csrf_token %}
+        <input list="farmers" type="text" placeholder="Sales Name" name="name" id="fname">
+        <datalist id="farmers">
+            {% for name in names %}
+            <option value="{{name}}"> </option>
+            {% endfor %}
+        </datalist>
+        <input type="date" id="date" name="date">
+        <input type="submit" id="submit_btn">
+    </form>
+
+    <div style="display: flex; align-items: center; justify-content: center; width: 100vw; ">
+    </div>
+    <div id="body">
+        <br><br>
+        <table cellspacing="0">
+            <tr id="top">
+                <td> Id </td>
+                <td> Name </td>
+                <td> Date </td>
+                <td> Bill </td>
+                <td> Total Balance </td>
+            </tr>
+            {% for da in data %}
+            <tr class="row">
+            <td> {{da.id}} </td>
+            <td> {{da.name}} </td>
+            <td> {{da.date}} </td>
+            <td> {{da.bill}} </td>
+            <td> {{da.balance}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+
+    <div style="background-color: rgba(232, 122, 119, 0.4);" id="bills_top">
+        <h3 align="center"> Delete Record </h3>
+        <form action="balance_delete" method="post">
+            {% csrf_token %}
+            <input type="number" name="id" id="id" placeholder="Bill No">
+            <input id="submit_btn" style="width: 150px;" value="Delete" type="submit">
+        </form>
+
+    </div>
+</body>
+
+</html>

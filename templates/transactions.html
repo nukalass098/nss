@@ -43,7 +43,7 @@
                 <option value="SALE"> Sale </option>
             </select>
             <div id="check_sub">
-            <input type="checkbox" name="ad_check" id="check"> Advance
+            <input type="checkbox" checked name="ad_check" id="check"> Advance
             </div>
             </div>
             <input id="submit_btn" value="Save" type="submit">
@@ -58,9 +58,14 @@
 
             ele1.addEventListener('input', () => upper(ele1))
 
-            const currentDate = new Date();
-            const formattedDate = currentDate.toISOString().split('T')[0];
-            document.getElementById('date').value = formattedDate;
+            let date_stored = sessionStorage.getItem('date')
+                if (date_stored) {
+                    document.getElementById('date').value = date_stored
+                }
+                function change_date() {
+                    let c_date = document.getElementById('date').value
+                    sessionStorage.setItem('date', c_date)
+                }
 
             // adjust advance button 
 

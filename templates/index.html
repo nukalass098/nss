@@ -5,11 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NSS</title>
 </head>
 
+
 <body background="{% static '/images/back.jpg' %}">
+<div id="hello_main">
     <header>
         <img alt="img" src="{% static '/images/shake.png' %}">
         <div id="div1">
@@ -24,6 +27,31 @@
             </ul>
         </div>
     </header>
+<div id="top_pending">
+    <form action="check" method="POST">
+        {% csrf_token %}
+        <input type="id" style="display: none;" name="id" id="tran_id">
+        <input type="date" style="display: none;" name="date" id="p_date">
+        <script>
+            let yourDate = new Date()
+            document.getElementById('p_date').value = yourDate.toISOString().split('T')[0]
+        </script>
+    </form>
+    {% for x in data %}
+    <div class="pending_sub" id={{x.id}} onclick="submission(this)">
+        {{x.id}} <br>
+        {{x.name}} <br>
+        {{x.date}} 
+    </div>
+    {% endfor %}
+    <script>
+        function submission(e){
+            let id = e.id
+            document.getElementById('tran_id').value = id
+            document.getElementsByTagName('form')[0].submit()
+        }
+    </script>
+</div>
     <div class="main">
         <a class="main_sub" href="{% url 'daybook' %}">
             <img src="{% static 'images/book.png' %}" class="main_img">
@@ -57,7 +85,7 @@
                 <img src="{% static 'images/account.png' %}" class="main_img">
                 <p class="main_p"> Accounts </p>
             </a>
-             <a class="main_sub" href="{% url 'bills' %}">
+            <a class="main_sub" href="{% url 'bills' %}">
             <img src="{% static 'images/bill.png' %}" class="main_img">
             <p class="main_p"> Manage Bills </p>
             </a>
@@ -86,8 +114,76 @@
         <img src="{% static 'images/submit.png' %}" class="main_img">
         <p class="main_p"> Submit Details </p>
     </a>
+    <a class="main_sub" href="{% url 'bills_given' %}">
+        <img src="{% static 'images/bill.png' %}" class="main_img">
+        <p class="main_p"> Bills Given </p>
+    </a>
+    <a class="main_sub" href="{% url 'balance' %}">
+        <img src="{% static 'images/payment.png' %}" class="main_img">
+        <p class="main_p"> Balance </p>
+    </a>
 </div>
+<div class="main">
+    <a class="main_sub" href="{% url 'balance_list' %}">
+        <img src="{% static 'images/book.png' %}" class="main_img">
+        <p class="main_p"> Balance List </p>
+    </a>
+</div>
+</div>
+<div id="date_main">
+    <br>
+    <br>
+    <h3 align="center"> ...Select Date to Continue... </h3>
+    <br>
+    <input type="button" onclick="today()" id="fname" value="Today  -  "/>
+    <p> (or) </p>
+    <input onchange="change_date()"  type="date" id="date"/>
+    <br>
+    <br>
+    <input onclick="check()" type="submit" id="submit_btn" />
+</div>
+<script>
 
+    let x = document.getElementById('fname').value += (new Date()).toJSON().slice(0, 10)
+
+    let date_stored = sessionStorage.getItem('date')
+    if (date_stored) {
+        document.getElementById('date').value = date_stored
+        document.getElementById('date_main').style.display = 'none'
+        document.getElementById('hello_main').style.display = 'block'
+    }
+    else{
+        document.getElementById('date_main').style.display = 'flex'
+        document.getElementById('hello_main').style.display = 'none'
+    }
+
+    function change_date() {
+
+        let c_date = document.getElementById('date').value
+        sessionStorage.setItem('date', c_date)
+        
+    }
+    function check(){
+        let date_stored = sessionStorage.getItem('date')
+        if (date_stored) {
+            document.getElementById('date').value = date_stored
+            document.getElementById('date_main').style.display = 'none'
+            document.getElementById('hello_main').style.display = 'block'
+        }
+        else {
+            document.getElementById('date_main').style.display = 'flex'
+            document.getElementById('hello_main').style.display = 'none'
+        }
+    }
+
+    // today date    
+    function today(){
+        const currentDate = new Date();
+        const formattedDate = currentDate.toISOString().split('T')[0];
+        sessionStorage.setItem('date', formattedDate)
+        check()
+    }
+</script>
 </body>
 
 </html>

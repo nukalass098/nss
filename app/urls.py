@@ -21,5 +21,11 @@ urlpatterns = [
     path('advance', views.advance, name = 'advance'),
     path('acc_statement', views.acc_statement, name='acc_statement'),
     path('submit', views.submit, name='submit'),
-    path('summary', views.summary, name = 'summary')
+    path('summary', views.summary, name = 'summary'),
+    path('bills_given', views.bills_given, name = 'bills_given'),
+    path('delete_bill', views.delete_bill, name = 'delete_bill'),
+    path('check', views.check, name='check'),
+    path('balance', views.balance, name='balance'),
+    path('balance_list', views.balance_list, name='balance_list'),
+    path('balance_delete', views.balance_delete, name='balance_list')
 ]
