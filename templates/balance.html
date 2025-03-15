@@ -36,7 +36,7 @@ margin-top: 20px;
         {% csrf_token %}
             <input required list="clients" type="text" placeholder="Sales name" class="in_1" name="name" maxlength="30">
             <datalist id="clients">
-                {% for clinet in sales %}
+                {% for clinet in names %}
                 <option value="{{clinet}}"> </option>
                 {% endfor %}
             </datalist>

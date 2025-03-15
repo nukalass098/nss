@@ -27,17 +27,15 @@
         </div>
 
     </header>
-
-    <div style="display: flex; align-items: center; justify-content: center; width: 100vw; ">
-        <br>
+    <div style="display: flex; align-items: flex-start;justify-content: center;width: 100vw;">
+<div style="width: 50vw; display: flex;align-items: center;flex-direction: column;">
     <table>
         <tr>
-            <td> Total : </td>
+            <td> Farmer : </td>
             <td> <b> {{total}} </b> </td>
         </tr>
     </table>
-    </div>
-    <div id="body">
+    <div >
         <br><br>
         <table cellspacing="0">
             <tr id="top">
@@ -53,6 +51,32 @@
         </table>
         <br>
     </div>
+</div>
+<div style="width: 50vw; display: flex;align-items: center;flex-direction: column;justify-content: center;">
+    <table>
+        <tr>
+            <td> Sales : </td>
+            <td> <b> {{c_tot}} </b> </td>
+        </tr>
+    </table>
+    <div id="body">
+        <br><br>
+        <table cellspacing="0">
+            <tr id="top">
+                <td> Name </td>
+                <td> Balance </td>
+            </tr>
+            {% for name, bal in c_data %}
+            <tr class="row">
+            <td> {{name}} </td>
+            <td> {{bal}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+    </div>
+</div>
+</div>
 </body>
 
 </html>
