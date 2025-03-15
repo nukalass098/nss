@@ -32,8 +32,8 @@
         {% csrf_token %}
         <input list="farmers" type="text" placeholder="Sales Name" name="name" id="fname">
         <datalist id="farmers">
-            {% for name in names %}
-            <option value="{{name}}"> </option>
+            {% for nam in names %}
+            <option value="{{nam}}"> </option>
             {% endfor %}
         </datalist>
         <input type="date" id="date" name="date">

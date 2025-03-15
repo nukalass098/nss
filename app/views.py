@@ -491,10 +491,14 @@ def submit(request):
 
 @login_required
 def summary(request):
-    name = [x for x in Accounts.objects.filter(type='FARMER')]
+    name = [x.name for x in Accounts.objects.filter(type='FARMER')]
     name_lis  = []
     price_lis = []
+    c_name = []
+    c_price = []
+    c_tot = 0
     tot = 0
+    c_bal = 0
     for name in name:
         bal = 0
         dates_pend = [x.date for x in Pending.objects.filter(name=name, pending = 'True')]
@@ -507,9 +511,20 @@ def summary(request):
         name_lis.append(name)
         price_lis.append(bal)
         tot += bal
-        data = list(zip(name_lis, price_lis))
-        data = sorted(data, key = lambda x:x[1], reverse=True)
-    return render(request, 'summary.html', {'data':data, 'total':tot})
+    data = list(zip(name_lis, price_lis))
+    data = sorted(data, key = lambda x:x[1], reverse=True)
+    c_names = [x.name for x in Accounts.objects.filter(type='SALE')]
+    for name in c_names:
+        try:
+            r = Accounts.objects.get(name = name)
+            c_bal += r.balance
+            c_name.append(r.name)
+            c_price.append(r.balance)
+        except:
+            return render(request, 'error.html', {'error':'Could not resolve!'})
+    c_data = list(zip(c_name, c_price))
+    c_data = sorted(c_data, key = lambda x : x[1], reverse = True)
+    return render(request, 'summary.html', {'data':data, 'total':tot, 'c_data' : c_data, 'c_tot':c_bal})
 
 @login_required
 def bills_given(request):
@@ -539,25 +554,45 @@ def delete_bill(request):
 
 @login_required
 def balance(request):
+    names = Accounts.objects.filter(type = 'SALE')
+    names = [name.name for name in names]
     if request.method == 'POST':
         name = request.POST.get('name')
         bill = request.POST.get('bill')
         date = request.POST.get('date')
         tot = request.POST.get('tot')
+        if name not in names:
+            return render(request, 'error.html', {'error':'Name not registered'})
         bal = Save(name = name, bill = bill, balance = tot, date = date)
         bal.save()
-    return render(request, 'balance.html')
+        try:
+            r = Accounts.objects.get(name = name)
+            r.balance = tot
+            r.save()
+        except:
+             return render(request, 'error.html', {'error':'Could not resolve!'})
+    return render(request, 'balance.html', {'names':names})
 
 @login_required
 def balance_delete(request):
+    names = Accounts.objects.filter(type = 'SALE')
+    names = [name.name for name in names]
+    data = []
     if request.method == 'POST':
         id = request.POST.get('id')
-        try:
+        if True:
             bal = Save.objects.get(id = id)
+            r = Accounts.objects.get(name = bal.name)
+            l = Save.objects.filter(name = bal.name)
+            if len(list(l)) > 1:
+                r.balance = list(l)[-2].balance
+            else:
+                r.balance = 0
+            r.save()
             bal.delete()
-        except:
-            return render(request, 'error.html', {'error':'Record Not Found'})
-    return render(request, 'balance_list.html')
+        # except:
+        #     return render(request, 'error.html', {'error':'Record Not Found'})
+    return render(request, 'balance_list.html',{'data':data, 'names':names})
 @login_required
 def balance_list(request):
     names = Accounts.objects.filter(type = 'SALE')
@@ -569,9 +604,12 @@ def balance_list(request):
         if date and name:
             data = list(Save.objects.filter(name = name, date=date))
         elif not date and name:
+            if name not in names:
+                return render(request, 'error.html', {'error':'Name not registered'})
             data = list(Save.objects.filter(name = name))
         elif not name and date:
             data = list(Save.objects.filter(date = date))
         else:
             data = list(Save.objects.all())[::-1]
-    return render(request, 'balance_list.html', {'data':data, 'names' :names})
+       
+    return render(request, 'balance_list.html', {'data':data, 'names':names})
