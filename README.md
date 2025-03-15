@@ -1,3 +1,4 @@
 added new features:
 
-1. balance and total due to the clients...
+1. client balance sheet
+2. 
