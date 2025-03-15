@@ -580,7 +580,7 @@ def balance_delete(request):
     data = []
     if request.method == 'POST':
         id = request.POST.get('id')
-        if True:
+        try:
             bal = Save.objects.get(id = id)
             r = Accounts.objects.get(name = bal.name)
             l = Save.objects.filter(name = bal.name)
@@ -590,8 +590,8 @@ def balance_delete(request):
                 r.balance = 0
             r.save()
             bal.delete()
-        # except:
-        #     return render(request, 'error.html', {'error':'Record Not Found'})
+        except:
+            return render(request, 'error.html', {'error':'Record Not Found'})
     return render(request, 'balance_list.html',{'data':data, 'names':names})
 @login_required
 def balance_list(request):
